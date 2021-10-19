@@ -16,7 +16,12 @@ public abstract class Vehiculo {
     }
 
     public Vehiculo(String placa) {
+        
+        if(placa==null || placa.length()==0 || placa.equals(""))
+            throw new IllegalArgumentException("La placa requiere un valor adecuado");
+           
         this.placa = placa;
+        
     }
 
     /**
