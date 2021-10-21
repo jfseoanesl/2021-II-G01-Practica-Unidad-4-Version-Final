@@ -6,6 +6,7 @@
 package datos;
 
 import entidades.Vehiculo;
+import excepciones.ExcepcionAccesoDatos;
 
 /**
  *
@@ -65,19 +66,19 @@ public class ImpArrays implements IAlquilable{
     }
 
     @Override
-    public boolean agregarVehiculoRenta(Vehiculo v) {
+    public boolean agregarVehiculoRenta(Vehiculo v) throws ExcepcionAccesoDatos {
         if(this.nRegistrados<this.nMaxVehiculos){
             this.lista[this.nRegistrados] = v;
             this.nRegistrados++;
             return true;
         }
         else{
-            throw new NullPointerException("El vehiculo de placa "+v.getPlaca()+" no puede ser agregado a lista de rentados, Se ha superado el limite de objetos de la lista");
+            throw new ExcepcionAccesoDatos("El vehiculo de placa "+v.getPlaca()+" no puede ser agregado a lista de rentados, Se ha superado el limite de objetos de la lista");
         }
     }
 
     @Override
-    public Vehiculo eliminarVehiculoDevuelto(Vehiculo v) {
+    public Vehiculo eliminarVehiculoDevuelto(Vehiculo v) throws ExcepcionAccesoDatos {
         
         Vehiculo eliminado = null;
         int posEliminado=0;
@@ -90,7 +91,7 @@ public class ImpArrays implements IAlquilable{
             }
         }
         if(eliminado==null) 
-            throw new NullPointerException("El Vehiculo de placa " + v.getPlaca() + "No se encuentra en la lista de rentados" );
+            throw new ExcepcionAccesoDatos("El Vehiculo de placa " + v.getPlaca() + " No se encuentra en la lista de rentados" );
         
         for(int i= posEliminado+1; i< this.nRegistrados; i++){
             this.lista[i-1] = this.lista[i];

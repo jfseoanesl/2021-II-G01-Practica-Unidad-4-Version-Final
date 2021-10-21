@@ -35,5 +35,10 @@ public class Lector {
         return var;
     }
     
+    public static String leerString(String title){
+        System.out.print(title);
+        return lector.next();
+    }
+    
     
 }
